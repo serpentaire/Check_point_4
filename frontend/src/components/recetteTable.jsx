@@ -1,24 +1,8 @@
-import React, { useState, useEffect } from "react";
-import apiConnexion from "@services/apiConnexion";
+import React from "react";
 
-function recetteTable() {
-  const [recettes, setRecettes] = useState([]);
-
-  const getRecettes = () => {
-    apiConnexion
-      .get(`/recettes`)
-      .then((data) => {
-        setRecettes(data.data);
-      })
-      .catch((error) => console.error(error));
-  };
-
-  useEffect(() => {
-    getRecettes();
-  }, []);
-
+function recetteTable({ operations }) {
   const sousTotal = () => {
-    const ssTotal = recettes.reduce((acc, currentValue) => {
+    const ssTotal = operations.reduce((acc, currentValue) => {
       return acc + parseFloat(currentValue.somme, 10);
     }, 0);
     return ssTotal.toFixed(2);
@@ -35,9 +19,9 @@ function recetteTable() {
             </tr>
           </thead>
           <tbody>
-            {recettes &&
-              recettes.map((recette) => (
-                <tr>
+            {operations &&
+              operations.map((recette) => (
+                <tr key={recette.nom}>
                   <td className="text-center border-b-2 hover:text-darkPink text-xs md:text-base lg:text-lg ">
                     {recette.nom}
                   </td>
@@ -47,7 +31,7 @@ function recetteTable() {
                 </tr>
               ))}
             <h1>Sous total :</h1>
-            {sousTotal()}
+            {operations && `${sousTotal()} €`}
           </tbody>
         </table>
       </div>
