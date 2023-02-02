@@ -30,6 +30,12 @@ class enregistrementManager extends AbstractManager {
       `select e.nom, e.somme from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Recettes'`
     );
   }
+
+  findDepenses() {
+    return this.connection.query(
+      `select e.nom, e.somme from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Dépenses'`
+    );
+  }
 }
 
 module.exports = enregistrementManager;

@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from "react";
 import apiConnexion from "@services/apiConnexion";
 
-function recetteTable() {
-  const [recettes, setRecettes] = useState([]);
+function depensesTable() {
+  const [depensess, setdepensess] = useState([]);
 
-  const getRecettes = () => {
+  const getdepensess = () => {
     apiConnexion
-      .get(`/recettes`)
+      .get(`/depenses`)
       .then((data) => {
-        setRecettes(data.data);
+        setdepensess(data.data);
       })
       .catch((error) => console.error(error));
   };
 
   useEffect(() => {
-    getRecettes();
+    getdepensess();
   }, []);
 
   const sousTotal = () => {
-    const ssTotal = recettes.reduce((acc, currentValue) => {
+    const ssTotal = depensess.reduce((acc, currentValue) => {
       return acc + parseFloat(currentValue.somme, 10);
     }, 0);
     return ssTotal.toFixed(2);
   };
 
   return (
-    <div className="recetteTable">
+    <div className="depensesTable">
       <div className="w-full">
         <table className="table-fixed w-full border-collapse mb-10">
           <thead>
@@ -35,14 +35,14 @@ function recetteTable() {
             </tr>
           </thead>
           <tbody>
-            {recettes &&
-              recettes.map((recette) => (
+            {depensess &&
+              depensess.map((depenses) => (
                 <tr>
                   <td className="text-center border-b-2 hover:text-darkPink text-xs md:text-base lg:text-lg ">
-                    {recette.nom}
+                    {depenses.nom}
                   </td>
                   <td className="text-center border-b-2 text-xs md:text-base lg:text-lg text-black">
-                    {`${recette.somme} €`}
+                    {`${depenses.somme} €`}
                   </td>
                 </tr>
               ))}
@@ -55,4 +55,4 @@ function recetteTable() {
   );
 }
 
-export default recetteTable;
+export default depensesTable;

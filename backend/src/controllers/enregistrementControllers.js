@@ -24,6 +24,18 @@ const findAllRecette = (req, res) => {
     });
 };
 
+const findAllDepense = (req, res) => {
+  models.enregistrement
+    .findDepenses()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const read = (req, res) => {
   models.enregistrement
     .find(req.params.id)
@@ -104,4 +116,5 @@ module.exports = {
   add,
   destroy,
   findAllRecette,
+  findAllDepense,
 };

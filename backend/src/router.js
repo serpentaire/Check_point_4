@@ -12,4 +12,6 @@ router.delete("/enregistrements/:id", enregistrementControllers.destroy);
 
 router.get("/recettes", enregistrementControllers.findAllRecette);
 
+router.get("/depenses", enregistrementControllers.findAllDepense);
+
 module.exports = router;
