@@ -1,32 +1,8 @@
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.enregistrement
-    .findAll()
-    .then(([rows]) => {
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
-const findAllRecette = (req, res) => {
-  models.enregistrement
-    .findRecettes()
-    .then(([rows]) => {
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-};
-
-const findAllDepense = (req, res) => {
-  models.enregistrement
-    .findDepenses()
+  models.n_comptes
+    .findAllComptes()
     .then(([rows]) => {
       res.send(rows);
     })
@@ -37,13 +13,13 @@ const findAllDepense = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.enregistrement
-    .find(req.params.id)
+  models.n_comptes
+    .findOneCompte(req.params.id)
     .then(([rows]) => {
-      if (rows[0] == null) {
+      if (rows == null) {
         res.sendStatus(404);
       } else {
-        res.send(rows[0]);
+        res.send(rows);
       }
     })
     .catch((err) => {
@@ -53,19 +29,19 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const enregistrement = req.body;
+  const nComptes = req.body;
 
   // TODO validations (length, format...)
 
-  enregistrement.id = parseInt(req.params.id, 10);
+  nComptes.id = parseInt(req.params.id, 10);
 
-  models.enregistrement
-    .update(enregistrement)
+  models.nComptes
+    .update(nComptes)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.status(204).send("Bien modifié");
+        res.sendStatus(204);
       }
     })
     .catch((err) => {
@@ -75,17 +51,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const enregistrement = req.body;
+  const nComptes = req.body;
 
   // TODO validations (length, format...)
 
-  models.enregistrement
-    .insert(enregistrement)
+  models.n_comptes
+    .insert(nComptes)
     .then(([result]) => {
-      res
-        .location(`/enregistrements/${result.insertId}`)
-        .status(201)
-        .send("Bien enregistré");
+      res.location(`/n_comptes/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -94,13 +67,13 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.enregistrement
+  models.n_comptes
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.status(204).send("Bien supprimé");
+        res.sendStatus(204);
       }
     })
     .catch((err) => {
@@ -115,6 +88,4 @@ module.exports = {
   edit,
   add,
   destroy,
-  findAllRecette,
-  findAllDepense,
 };
