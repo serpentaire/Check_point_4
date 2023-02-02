@@ -12,6 +12,18 @@ const browse = (req, res) => {
     });
 };
 
+const findAllRecette = (req, res) => {
+  models.enregistrement
+    .findRecettes()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const read = (req, res) => {
   models.enregistrement
     .find(req.params.id)
@@ -91,4 +103,5 @@ module.exports = {
   edit,
   add,
   destroy,
+  findAllRecette,
 };
