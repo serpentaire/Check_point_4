@@ -22,16 +22,22 @@ function recetteTable({ operations }) {
             {operations &&
               operations.map((recette) => (
                 <tr key={recette.nom}>
-                  <td className="text-center border-b-2 hover:text-darkPink text-xs md:text-base lg:text-lg ">
+                  <td className="text-center  text-xs md:text-base lg:text-lg ">
                     {recette.nom}
                   </td>
-                  <td className="text-center border-b-2 text-xs md:text-base lg:text-lg text-black">
+                  <td className="text-center text-xs md:text-base lg:text-lg text-black">
                     {`${recette.somme} €`}
                   </td>
                 </tr>
               ))}
-            <h1>Sous total :</h1>
-            {operations && `${sousTotal()} €`}
+            <tr>
+              <td className="text-center border-t-2  text-xs md:text-base lg:text-lg ">
+                Sous total :
+              </td>
+              <td className="text-center border-t-2 text-xs md:text-base lg:text-lg text-black">
+                {operations && `${sousTotal()} €`}
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
