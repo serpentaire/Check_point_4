@@ -16,6 +16,7 @@ router.get("/recettes", enregistrementControllers.findAllRecette);
 router.get("/depenses", enregistrementControllers.findAllDepense);
 
 router.get("/comptes", comptesControllers.browse);
-router.get("/compte/:id", comptesControllers.read);
+router.get("/compte/:id/enregistrements", enregistrementControllers.findAll);
+router.get("/compteId/:id", comptesControllers.readIdCompte);
 
 module.exports = router;

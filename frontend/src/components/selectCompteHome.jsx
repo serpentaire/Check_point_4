@@ -18,7 +18,7 @@ function SelectComptesHome({ selectComptes, comptes }) {
               font-normal
               text-gray-700
               bg-white bg-clip-padding bg-no-repeat
-              border border-solid border-gray-300
+              border border-solid border-blue
               rounded
               transition
               ease-in-out
@@ -28,7 +28,7 @@ function SelectComptesHome({ selectComptes, comptes }) {
           >
             <option selected>Les Comptes</option>
             {comptes.map((compte) => (
-              <option key={compte.id} value={compte.nom}>
+              <option key={compte.id} value={compte.id}>
                 {compte.nom}
               </option>
             ))}

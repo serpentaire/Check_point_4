@@ -109,6 +109,30 @@ const destroy = (req, res) => {
     });
 };
 
+const findAll = (req, res) => {
+  if (req.params.id === "8" || req.params.id === "9") {
+    models.enregistrement
+      .findBothCompte(8, 9)
+      .then(([rows]) => {
+        res.send(rows);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  } else {
+    models.enregistrement
+      .findOneCompte(req.params.id)
+      .then(([rows]) => {
+        res.send(rows);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  }
+};
+
 module.exports = {
   browse,
   read,
@@ -117,4 +141,5 @@ module.exports = {
   destroy,
   findAllRecette,
   findAllDepense,
+  findAll,
 };

@@ -36,6 +36,20 @@ class enregistrementManager extends AbstractManager {
       `select e.nom, e.somme from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Dépenses'`
     );
   }
+
+  findOneCompte(id) {
+    return this.connection.query(
+      `select e.id, e.nom, e.somme, e.type_id from  ${this.table} as e WHERE e.N_comptes_id = ?`,
+      [id]
+    );
+  }
+
+  findBothCompte(id, idBis) {
+    return this.connection.query(
+      `select e.id, e.nom, e.somme, e.type_id from  ${this.table} as e WHERE e.N_comptes_id IN (?, ?)`,
+      [id, idBis]
+    );
+  }
 }
 
 module.exports = enregistrementManager;

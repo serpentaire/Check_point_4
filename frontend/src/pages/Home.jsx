@@ -4,10 +4,10 @@ import apiConnexion from "@services/apiConnexion";
 import SelectComptesHome from "@components/selectCompteHome";
 
 export default function Home() {
-  const [depenses, setDepenses] = useState();
-  const [recettes, setRecettes] = useState();
+  const [depenses, setDepenses] = useState([]);
+  const [recettes, setRecettes] = useState([]);
   const [comptes, setComptes] = useState([]);
-  const [oneCompte, setOneCompte] = useState([]);
+  const [oneCompte, setOneCompte] = useState();
   const [oneCompteSelected, setOneCompteSelected] = useState([]);
 
   const selectComptes = (id) => {
@@ -36,14 +36,15 @@ export default function Home() {
     apiConnexion
       .get(`/comptes`)
       .then((data) => {
-        setComptes(data.data);
+        const result = data.data.filter((num) => num.id !== 9);
+        setComptes(result);
       })
       .catch((error) => console.error(error));
   };
 
   const getOneCompte = () => {
     apiConnexion
-      .get(`/compte/${oneCompte}`)
+      .get(`/compte/${oneCompte}/enregistrements`)
       .then((data) => {
         setOneCompteSelected(data.data);
       })
@@ -54,7 +55,12 @@ export default function Home() {
     getRecettes();
     getDepenses();
     getComptes();
-    getOneCompte();
+  }, []);
+
+  useEffect(() => {
+    if (oneCompte) {
+      getOneCompte();
+    }
   }, [oneCompte]);
 
   const Total = () => {
@@ -68,15 +74,16 @@ export default function Home() {
     ssTotalRecettes = ssTotalRecettes.toFixed(2);
     return ssTotalRecettes - ssTotalDepenses;
   };
+
   const TotalCompte = () => {
     let ssTotalDepenses = oneCompteSelected
-      .filter((num) => num.type === "Dépenses")
+      .filter((num) => num.type_id === 1)
       .reduce((acc, currentValue) => {
         return acc + parseFloat(currentValue.somme, 10);
       }, 0);
     ssTotalDepenses = ssTotalDepenses.toFixed(2);
     let ssTotalRecettes = oneCompteSelected
-      .filter((num) => num.type === "Recettes")
+      .filter((num) => num.type_id === 2)
       .reduce((acc, currentValue) => {
         return acc + parseFloat(currentValue.somme, 10);
       }, 0);
@@ -106,9 +113,7 @@ export default function Home() {
           <h1>Recettes :</h1>
           {oneCompteSelected && (
             <RecetteTable
-              operations={oneCompteSelected.filter(
-                (num) => num.type === "Recettes"
-              )}
+              operations={oneCompteSelected.filter((num) => num.type_id === 2)}
             />
           )}
         </div>
@@ -116,9 +121,7 @@ export default function Home() {
           <h1>Dépenses :</h1>
           {oneCompteSelected && (
             <RecetteTable
-              operations={oneCompteSelected.filter(
-                (num) => num.type === "Dépenses"
-              )}
+              operations={oneCompteSelected.filter((num) => num.type_id === 1)}
             />
           )}
         </div>
