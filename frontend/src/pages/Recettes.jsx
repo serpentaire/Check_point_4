@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastiConfig from "@services/toastiConfig";
 import SuppressTable from "@components/suppressTable";
+import UpdateTable from "@components/updateTable";
 
 function Recettes() {
   const [recettes, setRecettes] = useState([]);
@@ -99,7 +100,7 @@ function Recettes() {
             className="px-5 w-full h-8 border border-2 border-blue rounded-2xl"
             id="grid-nom"
             type="text"
-            placeholder="Déscrption"
+            placeholder="Déscription"
             name="nom"
             value={recette.nom}
             onChange={(e) => handleRecette(e.target.name, e.target.value)}
@@ -129,14 +130,21 @@ function Recettes() {
         </button>
       </div>
       <div>
-        <h2 className="pt-10 text-center md:text-start md:ml-20">
+        <h2 className="pt-5 text-center md:text-start md:ml-20">
           Supprimer une recette
         </h2>
         {recettes && (
           <SuppressTable operations={recettes} setOperations={setRecettes} />
         )}
       </div>
-      <h2>Modifier une recette</h2>
+      <div>
+        <h2 className=" text-center md:text-start md:ml-20">
+          Modifier une recette
+        </h2>
+        {recettes && (
+          <UpdateTable operations={recettes} setOperations={setRecettes} />
+        )}
+      </div>
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
