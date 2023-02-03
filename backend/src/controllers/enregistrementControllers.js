@@ -100,7 +100,7 @@ const destroy = (req, res) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.status(204).send("Bien supprimé");
+        res.status(204).send("Bien supprimée");
       }
     })
     .catch((err) => {

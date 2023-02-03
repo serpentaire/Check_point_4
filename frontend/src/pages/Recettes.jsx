@@ -4,8 +4,10 @@ import apiConnexion from "@services/apiConnexion";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import toastiConfig from "@services/toastiConfig";
+import SuppressTable from "@components/suppressTable";
 
-function recettes() {
+function Recettes() {
+  const [recettes, setRecettes] = useState([]);
   const [comptes, setComptes] = useState([]);
   const [oneCompte, setOneCompte] = useState();
   const [setOneCompteSelected] = useState([]);
@@ -62,19 +64,33 @@ function recettes() {
       .catch((error) => console.error(error));
   };
 
+  const getRecettes = () => {
+    apiConnexion
+      .get(`/recettes`)
+      .then((data) => {
+        setRecettes(data.data);
+      })
+      .catch((error) => console.error(error));
+  };
+
   useEffect(() => {
-    // getRecettes();
     // getDepenses();
     getComptes();
     getOneCompte();
   }, []);
 
+  useEffect(() => {
+    if (recettes) {
+      getRecettes();
+    }
+  }, []);
+
   return (
     <div className="recettes">
       <div className="Recettes p-5">
-        <h1 className="text-center md:text-start md:ml-20">
+        <h2 className="text-center md:text-start md:ml-20">
           Ajouter une recette
-        </h1>
+        </h2>
         <h1 className="mt-5">Numéro de compte :</h1>
         <SelectComptesHome selectComptes={selectComptes} comptes={comptes} />
         <div>
@@ -112,10 +128,15 @@ function recettes() {
           Enregistrer
         </button>
       </div>
-      <h1 className="pt-10 text-center md:text-start md:ml-20">
-        Supprimer une recette
-      </h1>
-      <h1>Modifier une recette</h1>
+      <div>
+        <h2 className="pt-10 text-center md:text-start md:ml-20">
+          Supprimer une recette
+        </h2>
+        {recettes && (
+          <SuppressTable operations={recettes} setOperations={setRecettes} />
+        )}
+      </div>
+      <h2>Modifier une recette</h2>
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
@@ -132,4 +153,4 @@ function recettes() {
   );
 }
 
-export default recettes;
+export default Recettes;

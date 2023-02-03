@@ -27,7 +27,7 @@ class enregistrementManager extends AbstractManager {
 
   findRecettes() {
     return this.connection.query(
-      `select e.nom, e.somme from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Recettes'`
+      `select e.id, e.nom, e.somme from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Recettes'`
     );
   }
 
