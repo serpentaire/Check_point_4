@@ -21,7 +21,7 @@ function recetteTable({ operations }) {
           <tbody>
             {operations &&
               operations.map((recette) => (
-                <tr key={recette.nom}>
+                <tr key={recette.id}>
                   <td className="text-center  text-xs md:text-base lg:text-lg ">
                     {recette.nom}
                   </td>

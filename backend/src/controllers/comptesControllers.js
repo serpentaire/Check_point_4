@@ -13,19 +13,35 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.n_comptes
-    .findOneCompte(req.params.id)
-    .then(([rows]) => {
-      if (rows == null) {
-        res.sendStatus(404);
-      } else {
-        res.send(rows);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  if (req.params.id === 8 || req.params.id === 9) {
+    models.n_comptes
+      .findBothCompte(8, 9)
+      .then(([rows]) => {
+        if (rows == null) {
+          res.sendStatus(404);
+        } else {
+          res.send(rows);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  } else {
+    models.n_comptes
+      .findOneCompte(req.params.id)
+      .then(([rows]) => {
+        if (rows == null) {
+          res.sendStatus(404);
+        } else {
+          res.send(rows);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  }
 };
 
 const edit = (req, res) => {
@@ -82,10 +98,27 @@ const destroy = (req, res) => {
     });
 };
 
+const readIdCompte = (req, res) => {
+  models.n_comptes
+    .findIdComptes(req.params.id)
+    .then(([rows]) => {
+      if (rows == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  readIdCompte,
 };
