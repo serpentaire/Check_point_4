@@ -29,9 +29,9 @@ INSERT INTO enregistrement(nom,somme,facture,N_comptes_id,type_id) VALUES ('EDF'
 INSERT INTO enregistrement(nom,somme,facture,N_comptes_id,type_id) VALUES ('Essence Clio',61.80,null,6,1);
 INSERT INTO enregistrement(nom,somme,facture,N_comptes_id,type_id) VALUES ('Gazoil Laguna',85.12,null,6,1);
 INSERT INTO enregistrement(nom,somme,facture,N_comptes_id,type_id) VALUES ('Salaire',2456.84,null,1,2);
-INSERT INTO enregistrement(nom,somme,facture,N_comptes_id,type_id) VALUES ('Repport du mois dernier',156.41,null,7,2);
+INSERT INTO enregistrement(nom,somme,facture,N_comptes_id,type_id) VALUES ('Report du mois dernier',156.41,null,7,2);
 INSERT INTO enregistrement(nom,somme,facture,N_comptes_id,type_id) VALUES ('Loyer',785,null,8,2);
-INSERT INTO enregistrement(nom,somme,facture,N_comptes_id,type_id) VALUES ('Frais de copropriété',125.60,null,9,2);
+INSERT INTO enregistrement(nom,somme,facture,N_comptes_id,type_id) VALUES ('Frais de copropriété',125.60,null,9,1);
 
 CREATE TABLE types (
   id int(11) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
