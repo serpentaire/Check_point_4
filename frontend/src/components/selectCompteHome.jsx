@@ -3,8 +3,8 @@ import React from "react";
 function SelectComptesHome({ selectComptes, comptes }) {
   return (
     <div>
-      <div className=" mb-3 flex justify-left">
-        <div className="mb-3 xl:w-96">
+      <div className=" mb-3 md:flex md:justify-center">
+        <div className="mb-3 xl:w-96 ">
           <select
             onChange={(e) => {
               selectComptes(e.target.value);

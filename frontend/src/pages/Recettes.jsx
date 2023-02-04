@@ -88,17 +88,15 @@ function Recettes() {
   }, []);
 
   return (
-    <div className="recettes">
-      <div className="Recettes p-5">
-        <h2 className="text-center md:text-start md:ml-20">
-          Ajouter une recette
-        </h2>
+    <div className="recettes text-center">
+      <div className="Recettes p-5 lg:ml-16  w-11/12 md:w-9/12 lg:px-14">
+        <h2 className="text-center ">Ajouter une recette</h2>
         <h1 className="mt-5">Numéro de compte :</h1>
         <SelectComptesHome selectComptes={selectComptes} comptes={comptes} />
         <div>
           <input
             required
-            className="px-5 w-full h-8 border border-2 border-blue rounded-2xl"
+            className="px-5 w-full md:w-1/3 h-8 border border-2 border-blue rounded-2xl"
             id="grid-nom"
             type="text"
             placeholder="Déscription"
@@ -107,7 +105,7 @@ function Recettes() {
             onChange={(e) => handleRecette(e.target.name, e.target.value)}
           />
         </div>
-        <div className="pt-5 flex">
+        <div className="flex justify-center pt-5">
           <input
             required
             className=" px-5 w-40 h-8 border border-2 border-blue rounded-2xl"
@@ -120,15 +118,15 @@ function Recettes() {
           />
           <h1 className="mt-1 ml-2">€</h1>
         </div>
-      </div>
-      <div className="flex justify-center">
-        <button
-          className=" p-1 px-5 border border-2 border-blue rounded-full"
-          type="button"
-          onClick={(e) => saveRecette(e)}
-        >
-          Enregistrer
-        </button>
+        <div className="flex justify-center pt-5">
+          <button
+            className=" p-1 px-5 border border-2 border-blue rounded-full"
+            type="button"
+            onClick={(e) => saveRecette(e)}
+          >
+            Enregistrer
+          </button>
+        </div>
       </div>
       <div>
         <h2 className="pt-5 text-center md:text-start md:ml-20">
