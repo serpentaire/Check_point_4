@@ -13,6 +13,11 @@ function UserProvider({ children }) {
     setUser(data);
   };
 
+  const logout = () => {
+    setUser();
+    sessionStorage.removeItem("user");
+  };
+
   useEffect(() => {
     sessionStorage.setItem("user", JSON.stringify(user));
   }, [user]);
@@ -22,6 +27,7 @@ function UserProvider({ children }) {
       value={{
         user,
         handleUser,
+        logout,
       }}
     >
       {children}
