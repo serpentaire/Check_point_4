@@ -11,8 +11,8 @@ function navbar() {
     navigate("/");
   };
   return (
-    <div className="navbar">
-      <div className="pb-4 flex justify-between md:justify-start">
+    <div className="navbar bg-white fixed z-50 sticky top-0">
+      <div className="pb-4 flex justify-between md:justify-start font-roboto">
         <Link to="/">
           <img src={logo} alt="logo" className="w-10 h-10" />
         </Link>
