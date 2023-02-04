@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import RecetteTable from "@components/recetteTable";
 import apiConnexion from "@services/apiConnexion";
 import SelectComptesHome from "@components/selectCompteHome";
+import ConnexionModal from "@components/ConnexionModal";
+import User from "../context/user";
 
 export default function Home() {
+  const { user } = useContext(User.UserContext);
+
+  const [connexionModalIsVisible, setConnexionModalIsVisible] = useState(!user);
+
   const [depenses, setDepenses] = useState([]);
   const [recettes, setRecettes] = useState([]);
   const [comptes, setComptes] = useState([]);
   const [oneCompte, setOneCompte] = useState();
   const [oneCompteSelected, setOneCompteSelected] = useState([]);
+
+  const handleOnCloseConnexionModal = () => {
+    setConnexionModalIsVisible(false);
+  };
 
   const selectComptes = (id) => {
     setOneCompte(id);
@@ -130,6 +140,10 @@ export default function Home() {
           {recettes && `${TotalCompte()} €`}
         </div>
       </div>
+      <ConnexionModal
+        visible={connexionModalIsVisible}
+        onclose={handleOnCloseConnexionModal}
+      />
     </div>
   );
 }

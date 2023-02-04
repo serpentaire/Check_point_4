@@ -45,7 +45,7 @@ INSERT INTO types(nom) VALUES ('Recettes');
 CREATE TABLE users (
   id int(11) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   nom varchar(255) NOT NULL,
-  mot_de_pass varchar(255) NOT NULL
+  hashedPassword varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO users(nom,mot_de_pass) VALUES ('glemoine@hotmail.fr','123');
+INSERT INTO users(nom,hashedPassword) VALUES ('glemoine@hotmail.fr','$argon2id$v=19$m=65536,t=5,p=1$AxsgJgdT3M2qxbaF7fcFQA$nIXNQKIWJBtFyfYpQLlLc7DkCBusP6G+GiuuZOddJf4');

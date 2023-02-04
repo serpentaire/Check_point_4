@@ -4,6 +4,7 @@ const router = express.Router();
 
 const enregistrementControllers = require("./controllers/enregistrementControllers");
 const comptesControllers = require("./controllers/comptesControllers");
+const usersControllers = require("./controllers/usersControllers");
 
 router.get("/enregistrements", enregistrementControllers.browse);
 router.get("/enregistrements/:id", enregistrementControllers.read);
@@ -18,5 +19,7 @@ router.get("/depenses", enregistrementControllers.findAllDepense);
 router.get("/comptes", comptesControllers.browse);
 router.get("/compte/:id/enregistrements", enregistrementControllers.findAll);
 router.get("/compteId/:id", comptesControllers.readIdCompte);
+
+router.post("/login", usersControllers.validateUser);
 
 module.exports = router;
