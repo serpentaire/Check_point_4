@@ -15,7 +15,7 @@ function Recettes() {
   const recetteType = {
     nom: "",
     somme: 0,
-    facture: "",
+    facture: "Null",
     N_comptes_id: 0,
     type_id: 2,
   };
@@ -25,6 +25,7 @@ function Recettes() {
   const selectComptes = (id) => {
     setOneCompte(id);
   };
+
   const handleRecette = (place, value) => {
     const newRecette = { ...recette };
     newRecette[place] = value;
