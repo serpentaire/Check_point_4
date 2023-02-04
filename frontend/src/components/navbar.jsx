@@ -1,8 +1,15 @@
-import { Link } from "react-router-dom";
-import React from "react";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "@assets/logo.png";
+import User from "../context/user";
 
 function navbar() {
+  const navigate = useNavigate();
+  const { logout } = useContext(User.UserContext);
+  const getLogout = () => {
+    logout();
+    navigate("/");
+  };
   return (
     <div className="navbar">
       <div className="pb-4 flex justify-between md:justify-start">
@@ -15,7 +22,10 @@ function navbar() {
         <Link to="/depenses">
           <h1 className="p-2">Dépenses</h1>
         </Link>
-        <h1 className="p-2">Rapport du mois</h1>
+        <h1 className="p-2">Rapport</h1>
+        <button className="" type="button" onClick={() => getLogout()}>
+          Déconnexion
+        </button>
       </div>
     </div>
   );
