@@ -17,6 +17,7 @@
   },
   "plugins": ["react", "import"],
   "rules": {
+    "eqeqeq": "off",
     "react/jsx-no-constructed-context-values": "off",
     "react/prop-types": "off",
     "no-console": "off",
