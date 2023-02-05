@@ -52,4 +52,6 @@ router.get("/compteId/:id", comptesControllers.readIdCompte);
 
 router.post("/login", usersControllers.validateUser);
 
+router.post("/email", enregistrementControllers.sendEmail);
+
 module.exports = router;
