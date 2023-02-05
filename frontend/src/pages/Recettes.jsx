@@ -76,7 +76,6 @@ function Recettes() {
   };
 
   useEffect(() => {
-    // getDepenses();
     getComptes();
     getOneCompte();
   }, []);

@@ -33,7 +33,7 @@ class enregistrementManager extends AbstractManager {
 
   findDepenses() {
     return this.connection.query(
-      `select e.nom, e.somme from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Dépenses'`
+      `select e.id, e.nom, e.somme from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Dépenses'`
     );
   }
 
