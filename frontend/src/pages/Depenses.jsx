@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SelectComptesHome from "@components/selectCompteHome";
 import apiConnexion from "@services/apiConnexion";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,10 +12,11 @@ function Depenses() {
   const [comptes, setComptes] = useState([]);
   const [oneCompte, setOneCompte] = useState();
   const [setOneCompteSelected] = useState([]);
+  const inputRef1 = useRef(null);
   const depenseType = {
     nom: "",
     somme: 0,
-    facture: "Null",
+    // facture: "",
     N_comptes_id: 0,
     type_id: 1,
   };
@@ -32,12 +33,20 @@ function Depenses() {
     setDepense(newDepense);
   };
 
+  const handleClick1 = () => {
+    inputRef1.current.click();
+  };
+
   const saveDepense = (e) => {
     e.preventDefault();
 
     const newDepense = { ...depense, N_comptes_id: oneCompte };
+    const formData = new FormData();
+    formData.append("facturePdf", inputRef1.current.files[0]);
+    formData.append("data", JSON.stringify(newDepense));
+
     apiConnexion
-      .post("/enregistrements", newDepense)
+      .post("/enregistrements", formData)
       .then(() => {
         toast.success(`Votre depense a bien été enregistrée`, toastiConfig);
       })
@@ -125,6 +134,24 @@ function Depenses() {
           >
             Enregistrer
           </button>
+          <form encType="multipart/form-data">
+            <button
+              className=" ml-7 p-1 px-5 border border-2 border-blue rounded-full"
+              type="button"
+              onClick={handleClick1}
+            >
+              Facture
+            </button>
+            <input
+              className="hidden"
+              type="file"
+              ref={inputRef1}
+              name="facture"
+              style={{ display: "none" }}
+              accept=".pdf"
+              value={depense.facture}
+            />
+          </form>
         </div>
       </div>
       <div>

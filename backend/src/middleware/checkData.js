@@ -16,7 +16,9 @@ const updateData = Joi.object({
 });
 
 const checkEnregistrement = (req, res, next) => {
-  const { error } = enregistrementData.validate(req.body, {
+  const enregistrement =
+    req.body.type_id === 2 ? req.body : JSON.parse(req.body.data);
+  const { error } = enregistrementData.validate(enregistrement, {
     abordEarly: false,
   });
   if (error) {

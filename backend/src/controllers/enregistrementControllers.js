@@ -75,12 +75,17 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const enregistrement = req.body;
+  let enregistrement = req.body.type_id === 2 ? req.body.data : req.body;
+  const facturePdf = `assets${
+    req.body.data
+      ? `/${req.files.facturePdf[0].filename}`
+      : "/images/favicon.png"
+  }`;
 
-  // TODO validations (length, format...)
-
+  enregistrement =
+    req.body.type_id === 2 ? req.body : JSON.parse(req.body.data);
   models.enregistrement
-    .insert(enregistrement)
+    .insert(enregistrement, facturePdf)
     .then(([result]) => {
       res
         .location(`/enregistrements/${result.insertId}`)
