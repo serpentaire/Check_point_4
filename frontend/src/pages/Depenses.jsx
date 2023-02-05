@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet";
 import SelectComptesHome from "@components/selectCompteHome";
 import apiConnexion from "@services/apiConnexion";
 import { ToastContainer, toast } from "react-toastify";
@@ -6,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import toastiConfig from "@services/toastiConfig";
 import SuppressTable from "@components/suppressTable";
 import UpdateTable from "@components/updateTable";
+import logo from "@assets/logo.png";
 
 function Depenses() {
   const [depenses, setDepenses] = useState([]);
@@ -97,6 +99,15 @@ function Depenses() {
 
   return (
     <div className="recettes text-center">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Dépenses</title>
+        <meta
+          name="description"
+          content="Page d'accueil du site TrackMySpend"
+        />
+        <link rel="icon" type="image/png" href={logo} />
+      </Helmet>
       <div className="Recettes p-5 lg:ml-16  w-11/12 md:w-9/12 lg:px-14">
         <h2 className="text-center ">Ajouter une dépense</h2>
         <h1 className="mt-5">Numéro de compte :</h1>
