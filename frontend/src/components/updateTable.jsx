@@ -31,7 +31,7 @@ function UpdateTable({ operations }) {
         .then(() => {
           updateOperation();
           setOpenUpdate(false);
-          toast.success(`La recette a bien été modifié.`, toastiConfig);
+          toast.success(`L'enregistrement a bien été modifié.`, toastiConfig);
         })
         .catch((err) => {
           toast.error(`Une erreur s'est produite`, toastiConfig);

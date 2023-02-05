@@ -155,8 +155,8 @@ export default function Home() {
         <h1 className="md:text-center">Etat par compte :</h1>
         <SelectComptesHome selectComptes={selectComptes} comptes={comptes} />
         {oneCompteSelected != 0 && (
-          <div>
-            <div className="flex flex-col md:grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-center justify-items-center justify-center mt-6 mx-14">
+          <div className="md:pl-12 xl:pl-64 xl:w-full">
+            <div className="flex flex-col md:grid grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 items-center justify-items-center justify-center mt-6 mx-14">
               <h1>Recettes :</h1>
               {oneCompteSelected && (
                 <RecetteTable
@@ -166,7 +166,7 @@ export default function Home() {
                 />
               )}
             </div>
-            <div className="flex flex-col md:grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-center justify-items-center justify-center  mx-14">
+            <div className="flex flex-col md:grid grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 items-center justify-items-center justify-center mt-6 mx-14">
               <h1>Dépenses :</h1>
               {oneCompteSelected && (
                 <RecetteTable
@@ -176,7 +176,7 @@ export default function Home() {
                 />
               )}
             </div>
-            <div className="flex flex-col text-xl md:grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-center justify-items-center justify-center mb-5 mx-14">
+            <div className="flex flex-col text-xl md:grid grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 items-center justify-items-center justify-center mb-5 mx-14">
               <h1>Solde du compte :</h1>
               <div className={`${couleurTotalCompte}`}>
                 {recettes && `${TotalCompte()} €`}
