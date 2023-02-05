@@ -154,7 +154,7 @@ export default function Home() {
         </div>
         <h1 className="md:text-center">Etat par compte :</h1>
         <SelectComptesHome selectComptes={selectComptes} comptes={comptes} />
-        {oneCompteSelected !== 0 && (
+        {oneCompteSelected != 0 && (
           <div>
             <div className="flex flex-col md:grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-center justify-items-center justify-center mt-6 mx-14">
               <h1>Recettes :</h1>
