@@ -75,13 +75,6 @@ function ConnexionModal({ visible, onclose }) {
           >
             Valider
           </button>
-          <button
-            type="button"
-            className="rounded-full px-6 mt-2 text-darkPink text-md hover:underline"
-            onClick={onclose}
-          >
-            Retour
-          </button>
         </div>
       </div>
       <ToastContainer
