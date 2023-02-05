@@ -13,6 +13,7 @@ const updateData = Joi.object({
   id: Joi.number().presence("required"),
   nom: Joi.string().min(3).max(255).presence("required"),
   somme: Joi.number().presence("required"),
+  facture: Joi.string().max(255).presence("optional"),
 });
 
 const checkEnregistrement = (req, res, next) => {
