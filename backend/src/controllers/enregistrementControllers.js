@@ -1,4 +1,5 @@
 const models = require("../models");
+const sendMail = require("./emailControleurs");
 
 const browse = (req, res) => {
   models.enregistrement
@@ -138,6 +139,79 @@ const findAll = (req, res) => {
   }
 };
 
+const sendEmail = (req, res) => {
+  const recette = req.body.filter((num) => num.type_id === 2);
+  const depense = req.body.filter((num) => num.type_id === 1);
+
+  const email = {
+    name: "LEMOINE",
+    surname: "Gaëtan",
+    phone: "0761074681",
+    email: "glemoine@hotmail.fr",
+    message: "Bonjour, ci-dessous l'état du compte à ce jour :",
+  };
+
+  const mailOptions = {
+    from: "glemoine@hotmail.fr",
+    to: email.email, // this is the address to which the email will be sent
+    subject: "Rapport comptable",
+    attachments: [
+      {
+        filename: "Logo-Externatic.png",
+        path: "public/assets/images/favicon.png",
+        cid: "logo",
+      },
+    ],
+    text: `${email.message} \n\n Phone: ${email.phone} \n\n Name: ${email.name} \n\n Surname: ${email.surname} \n\n Email: ${email.email}`,
+    html: `
+    <p>${email.message}</p>
+    <table style="border: 1px solid black;">
+      <thead>
+        <tr>
+          <th style="border: 1px solid black;">Recette</th>
+          <th style="border: 1px solid black;">Somme</th>
+        </tr>
+      </thead>
+      <tbody>
+      ${recette.map(
+        (row) =>
+          `<tr>
+          <td style="border: 1px solid black;">${row.nom}</td>
+          <td style="border: 1px solid black;">${row.somme} €</td>
+        </tr>
+        `
+      )}
+      </tbody>
+    </table>
+    <br>
+    <table style="border: 1px solid black;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid black;">Dépenses</th>
+        <th style="border: 1px solid black;">Somme</th>
+      </tr>
+    </thead>
+    <tbody>
+    ${depense.map(
+      (rowdep) =>
+        `<tr>
+        <td style="border: 1px solid black;">${rowdep.nom}</td>
+        <td style="border: 1px solid black;">${rowdep.somme} €</td>
+      </tr>
+      `
+    )}
+    </tbody>
+  </table>
+
+    <br>
+    <img src="cid:logo" height="100"
+  `,
+  };
+
+  sendMail(mailOptions);
+  res.sendStatus(200);
+};
+
 module.exports = {
   browse,
   read,
@@ -147,4 +221,5 @@ module.exports = {
   findAllRecette,
   findAllDepense,
   findAll,
+  sendEmail,
 };
