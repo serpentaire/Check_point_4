@@ -53,10 +53,10 @@ function navbar() {
         <Link to="/depenses">
           <h1 className="p-2">Dépenses</h1>
         </Link>
-        <button className="" type="button" onClick={() => sendEmail()}>
+        <button className="p-2" type="button" onClick={() => sendEmail()}>
           Rapport
         </button>
-        <button className="" type="button" onClick={() => getLogout()}>
+        <button className="p-2" type="button" onClick={() => getLogout()}>
           Déconnexion
         </button>
       </div>

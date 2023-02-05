@@ -17,7 +17,7 @@ function suppressTable({ operations, setOperations }) {
         .delete(`/enregistrements/${operation.id}`)
         .then(() => {
           deleteOperation(operation);
-          toast.success(`La recette a bien été supprimée.`, toastiConfig);
+          toast.success(`L'enregistrement a bien été supprimée.`, toastiConfig);
         })
         .catch((err) => {
           toast.error(`Une erreur s'est produite`, toastiConfig);
