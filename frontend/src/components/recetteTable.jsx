@@ -1,4 +1,5 @@
 import React from "react";
+import icone from "@assets/PDF_24287.png";
 
 function recetteTable({ operations }) {
   const sousTotal = () => {
@@ -27,6 +28,20 @@ function recetteTable({ operations }) {
                   </td>
                   <td className="text-center text-xs md:text-base lg:text-lg text-black">
                     {`${recette.somme} €`}
+                  </td>
+                  <td className="text-center text-xs md:text-base lg:text-lg text-black">
+                    {recette.facture !== "assets/images/favicon.png" && (
+                      <button type="button" className="">
+                        <a
+                          href={`${import.meta.env.VITE_BACKEND_URL}/${
+                            recette.facture
+                          }`}
+                          download
+                        >
+                          <img src={icone} alt="icone" className="w-9 h-9" />
+                        </a>
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}

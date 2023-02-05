@@ -5,13 +5,13 @@ class enregistrementManager extends AbstractManager {
     super({ table: "enregistrement" });
   }
 
-  insert(enregistrement) {
+  insert(enregistrement, facturePdf) {
     return this.connection.query(
       `insert into ${this.table} (nom, somme, facture, N_comptes_id, type_id) values (?, ?, ?, ?, ?)`,
       [
         enregistrement.nom,
         enregistrement.somme,
-        enregistrement.facture,
+        facturePdf,
         enregistrement.N_comptes_id,
         enregistrement.type_id,
       ]
@@ -27,13 +27,13 @@ class enregistrementManager extends AbstractManager {
 
   findRecettes() {
     return this.connection.query(
-      `select e.id, e.nom, e.somme from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Recettes'`
+      `select e.id, e.nom, e.somme, e.facture from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Recettes'`
     );
   }
 
   findDepenses() {
     return this.connection.query(
-      `select e.id, e.nom, e.somme from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Dépenses'`
+      `select e.id, e.nom, e.somme, e.facture from  ${this.table} as e INNER JOIN types as t on t.id=e.type_id where t.nom like 'Dépenses'`
     );
   }
 
