@@ -46,7 +46,7 @@ class enregistrementManager extends AbstractManager {
 
   findBothCompte(id, idBis) {
     return this.connection.query(
-      `select e.id, e.nom, e.somme, e.type_id from  ${this.table} as e WHERE e.N_comptes_id IN (?, ?)`,
+      `select e.id, e.nom, e.somme, e.facture, e.type_id from  ${this.table} as e WHERE e.N_comptes_id IN (?, ?)`,
       [id, idBis]
     );
   }
